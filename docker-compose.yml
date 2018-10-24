@@ -1,0 +1,26 @@
+version: "2"
+services:
+ mongo:
+  image: mongo
+  ports:
+   - "27017:27017"
+ rabbitmq:
+  image: rabbitmq:3-management
+  ports:
+   - "15672:15672"
+   - "5672:5672"
+ permissionSearch:
+  image: fgseitsrancher.wifa.intern.uni-leipzig.de:5000/permissionsearch:unstable
+  ports:
+   - "8080:8080"
+  environment:
+   - AMQP_URL=amqp://guest:guest@rabbitmq:5672/
+   - INITIAL_GROUP_RIGHTS_UPDATE=false
+   - CONSUMPTION_PAUSE=false
+  links:
+    - rabbitmq
+    - elastic
+ elastic:
+  image: elasticsearch:latest
+  ports:
+    - "9200:9200"

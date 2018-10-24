@@ -1,0 +1,34 @@
+{
+  "id": "/bpm-process-repo/process-repository",
+  "cpus": 0.2,
+  "mem": 128.0,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "seplci.wifa.intern.uni-leipzig.de/process-repo:unstable",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 0,
+          "protocol": "tcp",
+          "name": "rest-endpoints"
+        }
+      ],
+      "forcePullImage": true
+    }
+  },
+  "healthChecks": [
+    {
+      "path": "/process",
+      "protocol": "HTTP",
+      "portIndex": 0
+    }
+  ],
+  "labels": {
+    "HAPROXY_GROUP": "external"
+  },
+  "env": {
+    "MONGO": "mongodb://seplmaster.wifa.intern.uni-leipzig.de:10012"
+  }
+}

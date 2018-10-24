@@ -1,0 +1,17 @@
+{
+  "name": "sepl-process-repository",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node ./app/app"
+  },
+  "dependencies": {
+    "amqplib": "^0.5.2",
+    "body-parser": "^1.15.2",
+    "bson": "^0.5.6",
+    "dotenv": "^6.0.0",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^8.1.1",
+    "mongodb": "^2.2.10",
+    "when": "^3.7.7"
+  }
+}

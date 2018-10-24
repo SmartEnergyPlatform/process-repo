@@ -1,0 +1,160 @@
+swagger: '2.0'
+info:
+  title: SEPL Process Repository
+  termsOfService: http://swagger.io/terms/
+  description: ''
+  version: '1.0'
+  contact:
+    name: sh20xyqi
+    email: sh20xyqi@studserv.uni-leipzig.de
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+schemes:
+  - https
+
+host: api.sepl.infai.org
+
+basePath: /sepl-process-repository
+
+produces:
+  - text/plain
+
+paths:
+  /:
+    post:
+      summary:
+        Adds a process model.
+      description:
+        ''
+      parameters:
+        - name: process
+          in: body
+          description: The to be added process model.
+          required: true
+          schema:
+            $ref: '#/definitions/Process'
+      responses:
+        400:
+          description:
+            The passed process model is invalid.
+          schema:
+            type: string
+            format: atring
+        500:
+          description:
+            An internal error has been occured.
+          schema:
+            type: string
+            format: astring
+        200:
+          description:
+            The process model has been added to the database.
+          schema:
+            type: string
+            format: string
+  /{id}:
+    get:
+      summary:
+        Returns the process model behind the passed id.
+      description:
+        ''
+      parameters:
+        - name: id
+          in: path
+          description: The id of the to be deleted process model.
+          required: true
+          type: string
+      responses:
+        401:
+          description:
+            Access has been denied.
+          schema:
+            type: string
+            format: string
+        200:
+          description:
+            Returns the updated process model.
+          schema:
+            $ref: '#/definitions/Process'
+    put:
+      summary:
+        Updates the process model behind the passed id.
+      description:
+        ''
+      parameters:
+        - name: id
+          in: path
+          description: The id of the to be deleted process model.
+          required: true
+          type: string
+        - name: process
+          in: body
+          description: The to be updated process mode.
+          required: true
+          schema:
+            $ref: '#/definitions/Process'
+      responses:
+        400:
+          description:
+            The passed process model is invalid.
+          schema:
+            type: string
+            format: string
+        500:
+          description:
+            An internal error has been occured.
+          schema:
+            type: string
+            format: string
+        200:
+          description:
+            Returns the updated process model.
+          schema:
+            $ref: '#/definitions/Process'
+        401:
+          description:
+            Access has been denied.
+          schema:
+            type: string
+            format: string
+    delete:
+      summary:
+        Deletes the process model behind the passed id.
+      description:
+        ''
+      parameters:
+        - name: id
+          in: path
+          description: The id of the to be deleted process model.
+          required: true
+          type: string
+      responses:
+        400:
+          description:
+            The required id is missing.
+          schema:
+            type: string
+            format: string
+        500:
+          description:
+            An internal error has been occured.
+          schema:
+            type: string
+            format: string
+        200:
+          description:
+            The process model has been deleted.
+          schema:
+            type: string
+            format: string
+        401:
+          description:
+            Access has been denied.
+          schema:
+            type: string
+            format: string
+definitions:
+  Process:
+    type: object
